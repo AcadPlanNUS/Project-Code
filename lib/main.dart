@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackAndRoll/modelmanager.dart';
+import 'package:hackAndRoll/screens/AcadPlan.dart';
 import 'package:hackAndRoll/storage/storage.dart';
 
 import './screens/CompletedModule.dart';
@@ -151,6 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => CompletedModule(widget.completedMods)),
+      //MaterialPageRoute(builder: (context) => AcadPlan()),
   );
     }
   }
