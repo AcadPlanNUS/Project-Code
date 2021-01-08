@@ -4,8 +4,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:hackAndRoll/models/module.dart';
 
-class Storage {
+import '../models/module.dart';
 
+class Storage {
   Future<List<Module>> fetchModule() async {
     final response =
         await http.get('https://api.nusmods.com/v2/2020-2021/moduleList.json');
