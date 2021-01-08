@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:hackAndRoll/modelmanager.dart';
+import 'package:hackAndRoll/storage/storage.dart';
 
 import './widgets/FirstScreenForm.dart';
 
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   String _studentYear = '';
@@ -99,6 +102,15 @@ var FocusAreaOptions = [
     },
   ];
 
+  ModelManager modelManager;
+  Storage storage = new Storage();
+
+  @override
+  void initState() {
+    super.initState();
+    storage.fetchModule();
+  }
+  
   void _submitUE(String value) {
     var parse = int.parse(value);
     if (int == null) {
