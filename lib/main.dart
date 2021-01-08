@@ -147,11 +147,15 @@ class _MyHomePageState extends State<MyHomePage> {
     print(widget._studentYear);
     print(widget._focusArea);
 
-    if (widget._UeRemaining != null && widget._studentYear != '' && widget._focusArea != '' && widget._GeRemaining != null) {
+    if (widget._UeRemaining != null &&
+        widget._studentYear != '' &&
+        widget._focusArea != '' &&
+        widget._GeRemaining != null) {
       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => CompletedModule(widget.completedMods)),
-  );
+        context,
+        MaterialPageRoute(
+            builder: (context) => CompletedModule(widget.completedMods)),
+      );
     }
   }
 
@@ -177,6 +181,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+            Container(
+                constraints: BoxConstraints.expand(
+                  height: 300.0,
+                ),
+                child: Image.asset(
+                  "assets/images/acadplannus.png",
+                )),
             Card(
               elevation: 5,
               child: Padding(
