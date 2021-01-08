@@ -51,17 +51,21 @@ class CompletedModule extends StatefulWidget {
 class _CompletedModuleState extends State<CompletedModule> {
   @override
   Widget build(BuildContext context) {
+    List<String> sortedcsModules = [...widget.csModules];
+    sortedcsModules.sort((a, b) => a.contains('C', 0) && b.contains('C', 0)
+        ? 0
+        : b.length.compareTo(a.length));
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Acad Planner NUS'),
-      ),
-      body: ListView( 
-        children: widget.csModules
-          .map((mod) => Container(
-            decoration: BoxDecoration(color: Colors.white),
-            child: ModuleTile(mod, widget.completedModules),
-          )
-      ).toList(),)
-    );
+        appBar: AppBar(
+          title: Text('Acad Planner NUS'),
+        ),
+        body: ListView(
+          children: sortedcsModules
+              .map((mod) => Container(
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: ModuleTile(mod, widget.completedModules),
+                  ))
+              .toList(),
+        ));
   }
 }
