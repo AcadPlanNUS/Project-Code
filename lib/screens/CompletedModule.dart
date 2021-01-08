@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/moduleTile.dart';
+import 'AcadPlan.dart';
 
 class CompletedModule extends StatefulWidget {
   var csModules = [
@@ -49,6 +50,14 @@ class CompletedModule extends StatefulWidget {
 }
 
 class _CompletedModuleState extends State<CompletedModule> {
+  void _press() {
+    List<String> copy = [...widget.csModules];
+    copy.removeWhere((element) => widget.completedModules.contains(element));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AcadPlan(copy)),
+  );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +70,10 @@ class _CompletedModuleState extends State<CompletedModule> {
             decoration: BoxDecoration(color: Colors.white),
             child: ModuleTile(mod, widget.completedModules),
           )
-      ).toList(),)
+      ).toList(),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _press,
+      ),
     );
   }
 }
