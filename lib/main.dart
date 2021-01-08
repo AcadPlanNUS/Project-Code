@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
-      routes: {'/completedModule': (ctx) => CompletedModule()},
     );
   }
 }
@@ -147,11 +146,12 @@ class _MyHomePageState extends State<MyHomePage> {
     print(widget._GeRemaining);
     print(widget._studentYear);
     print(widget._focusArea);
-    if (widget._UeRemaining != null &&
-        widget._studentYear != '' &&
-        widget._focusArea != '' &&
-        widget._GeRemaining != null) {
-      Navigator.of(context).pushNamed('/completedModule');
+
+    if (widget._UeRemaining != null && widget._studentYear != '' && widget._focusArea != '' && widget._GeRemaining != null) {
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CompletedModule(widget.completedMods)),
+  );
     }
   }
 
