@@ -25,6 +25,7 @@ class MyHomePage extends StatefulWidget {
   String _focusArea = '';
   int _UeRemaining;
   int _GeRemaining;
+  var completedMods = [];
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
