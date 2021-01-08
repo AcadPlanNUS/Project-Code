@@ -34,35 +34,35 @@ class _MyHomePageState extends State<MyHomePage> {
   var YearOptions = [
     {
       "display": "Year 1 Sem 1",
-      "value": "Year 1 sem 1",
+      "value": "Year 1 Sem 1",
     },
     {
       "display": "Year 1 Sem 2",
-      "value": "Year 1 sem 2",
+      "value": "Year 1 Sem 2",
     },
     {
       "display": "Year 2 Sem 1",
-      "value": "Year 2 sem 1",
+      "value": "Year 2 Sem 1",
     },
     {
       "display": "Year 2 Sem 2",
-      "value": "Year 2 sem 2",
+      "value": "Year 2 Sem 2",
     },
     {
       "display": "Year 3 Sem 1",
-      "value": "Year 3 sem 1",
+      "value": "Year 3 Sem 1",
     },
     {
       "display": "Year 3 Sem 2",
-      "value": "Year 3 sem 2",
+      "value": "Year 3 Sem 2",
     },
     {
       "display": "Year 4 Sem 1",
-      "value": "Year 4 sem 1",
+      "value": "Year 4 Sem 1",
     },
     {
       "display": "Year 4 Sem 2",
-      "value": "Year 4 sem 2",
+      "value": "Year 4 Sem 2",
     },
   ];
 
@@ -118,8 +118,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void addModules(List<Module> modules) {
     moduleMap = Map.fromIterable(modules,
         key: (mod) => mod.moduleCode, value: (mod) => mod);
-    // Example usage
-    print(moduleMap["CS1010"].toString());
   }
 
   void _submitUE(String value) {
@@ -144,7 +142,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int getSemNumber() {
     for (int i = 0; i < YearOptions.length; i++) {
+       print(YearOptions[i].values.first);
+        print(widget._studentYear); 
       if (YearOptions[i].values.first == widget._studentYear) {
+      
         return i;
       }
       

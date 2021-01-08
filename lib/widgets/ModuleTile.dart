@@ -13,7 +13,6 @@ class ModuleTile extends StatefulWidget {
 
 class _ModuleTileState extends State<ModuleTile> {
   void _addAndDeleteModules(String moduleName) {
-    print("Hello");
     setState(() {
       if (widget.tileColor == Colors.white) {
         widget.completedModule.add(widget.moduleName);
