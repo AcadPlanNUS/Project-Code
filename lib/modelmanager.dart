@@ -7,12 +7,12 @@ class ModelManager {
   ModelManager({this.modules});
 
   Module getModule(String module) {
-    final mod = modules.firstWhere((element) =>
-      element.moduleCode == module,
-      orElse: () {
-        return null;
-      });
-    return mod;
+    for(Module mod in modules) {
+      if (mod.moduleCode == module) {
+        return mod;
+      }
+    }
+    return null;
   }
 
 }

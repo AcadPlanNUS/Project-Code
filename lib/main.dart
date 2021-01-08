@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:hackAndRoll/modelmanager.dart';
+import 'package:hackAndRoll/storage/storage.dart';
 
 import './screens/CompletedModules.dart';
 
 import './widgets/FirstScreenForm.dart';
+import 'models/module.dart';
 
 void main() => runApp(MyApp());
 
@@ -66,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     },
   ];
 
-var FocusAreaOptions = [
+  var FocusAreaOptions = [
     {
       "display": "Networking",
       "value": "Networking",
@@ -105,6 +108,23 @@ var FocusAreaOptions = [
     },
   ];
 
+  ModelManager modelmanager;
+  Storage storage = new Storage();
+  Map<String, Module> moduleMap;
+
+  @override
+  void initState() {
+    super.initState();
+    storage.fetchModule().then((List<Module> modList) => addModules(modList));
+  }
+
+  void addModules(List<Module> modules) {
+    moduleMap = Map.fromIterable(modules,
+        key: (mod) => mod.moduleCode, value: (mod) => mod);
+    // Example usage
+    print(moduleMap["CS1010"].toString());
+  }
+
   void _submitUE(String value) {
     var parse = int.parse(value);
     if (parse >= 0 && parse <= 32) {
@@ -130,6 +150,7 @@ var FocusAreaOptions = [
     print(widget._GeRemaining);
     print(widget._studentYear);
     print(widget._focusArea);
+
     if (widget._UeRemaining != null && widget._studentYear != '' && widget._focusArea != '' && widget._GeRemaining != null) {
       Navigator.of(context).pushNamed('/completedModules');
     }
@@ -153,34 +174,45 @@ var FocusAreaOptions = [
       appBar: AppBar(
         title: Text('Acad Planner NUS'),
       ),
-      body: SingleChildScrollView(child: 
-        Column(
+      body: SingleChildScrollView(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Card(
-              elevation: 5, 
+              elevation: 5,
               child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Column(children: <Widget>[
-                  TextField(decoration: InputDecoration(labelText: 'Amount of UEs Remaining'),
-                  onSubmitted: _submitUE, onChanged: _submitUE,),
-                  TextField(decoration: InputDecoration(labelText: 'Amount of GEs Remaining'),
-                  onSubmitted: _submitGE, onChanged: _submitGE,),
-                  FirstScreenForm('Student Year', widget._studentYear, YearOptions, _saveStudentYear),
-                  FirstScreenForm('Focus Area', widget._focusArea, FocusAreaOptions, _saveFocusArea),
-                ],)
-              ),
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    children: <Widget>[
+                      TextField(
+                        decoration: InputDecoration(
+                            labelText: 'Amount of UEs Remaining'),
+                        onSubmitted: _submitUE,
+                        onChanged: _submitUE,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                            labelText: 'Amount of GEs Remaining'),
+                        onSubmitted: _submitGE,
+                        onChanged: _submitGE,
+                      ),
+                      FirstScreenForm('Student Year', widget._studentYear,
+                          YearOptions, _saveStudentYear),
+                      FirstScreenForm('Focus Area', widget._focusArea,
+                          FocusAreaOptions, _saveFocusArea),
+                    ],
+                  )),
             ),
             Container(
-                padding: EdgeInsets.all(8),
-                child: RaisedButton(
-                  child: Text('NEXT'),
-                  onPressed: _saveForm,
-                ),
+              padding: EdgeInsets.all(8),
+              child: RaisedButton(
+                child: Text('NEXT'),
+                onPressed: _saveForm,
               ),
+            ),
           ],
         ),
-      ),   
+      ),
     );
   }
 }
