@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:hackAndRoll/modelmanager.dart';
+import 'package:hackAndRoll/storage/storage.dart';
+import '../models/module.dart';
+
 class CompletedModules extends StatefulWidget {
   var csModules = [
      "CS1101S", "CS1231S", "MA1521", "MA1101R", 
@@ -9,12 +13,47 @@ class CompletedModules extends StatefulWidget {
       "ULR", "ULR", "CS3203", "CS3219", "CS4211", "CS4239",
       "CS4218", "Science", "UE", "UE", "UE", "FOCUS AREA", "UE", "UE", "UE", "UE" 
     ];
+  Color tileColor = Colors.white;
 
   @override
   _CompletedModulesState createState() => _CompletedModulesState();
 }
 
 class _CompletedModulesState extends State<CompletedModules> {
+
+  ModelManager modelmanager;
+  Storage storage = new Storage();
+  Map<String, Module> moduleMap;
+
+  @override
+  void initState() {
+    super.initState();
+    storage.fetchModule().then((List<Module> modList) => addModules(modList));
+  }
+
+  void addModules(List<Module> modules) {
+    moduleMap = Map.fromIterable(modules,
+        key: (mod) => mod.moduleCode, value: (mod) => mod);
+    // Example usage
+    print(moduleMap["CS1010"].toString());
+  }
+
+
+
+
+
+  void _selectMod() {
+    setState(() {
+      if (widget.tileColor == Colors.white) {
+        print("hello");
+        widget.tileColor = Colors.green;
+      } else  {
+        widget.tileColor = Colors.white;
+      }
+          
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,10 +62,12 @@ class _CompletedModulesState extends State<CompletedModules> {
       ),
       body: ListView(
         children: widget.csModules
-          .map((mod) => ListTile(
-            onTap: null, 
-            title: Text('hello'),
-          )
+          .map((mod) => Container(
+            decoration: BoxDecoration(color: widget.tileColor),
+            child: ListTile(
+              onTap: _selectMod, 
+              title: Text(mod),
+          ),)
       ).toList(),)
     );
   }
