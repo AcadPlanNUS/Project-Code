@@ -3,7 +3,7 @@ import '../widgets/moduleTile.dart';
 import 'AcadPlan.dart';
 
 class CompletedModule extends StatefulWidget {
-  String sem;
+  int sem;
   var csModules = [
     "CS1101S Programming Methodology",
     "CS1231S Discrete Structures",

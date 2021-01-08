@@ -142,6 +142,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return;
   }
 
+  int getSemNumber() {
+    for (int i = 0; i < YearOptions.length; i++) {
+      if (YearOptions[i].values.first == widget._studentYear) {
+        return i;
+      }
+      
+    }
+    return 0;
+  }
+
   void _saveForm() {
     print(widget._UeRemaining);
     print(widget._GeRemaining);
@@ -155,8 +165,8 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CompletedModule(widget.completedMods, widget._studentYear)),
-      );
+            builder: (context) => CompletedModule(widget.completedMods, getSemNumber()),
+      ));
     }
   }
 

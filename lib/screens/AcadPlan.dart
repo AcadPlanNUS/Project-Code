@@ -4,7 +4,7 @@ import 'package:hackAndRoll/widgets/Semester.dart';
 
 class AcadPlan extends StatefulWidget {
   List<String> csModules;
-  String sem;
+  int sem;
   AcadPlan(this.csModules, this.sem);
   @override
   _AcadPlanState createState() => _AcadPlanState();
