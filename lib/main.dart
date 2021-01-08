@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hackAndRoll/modelmanager.dart';
 import 'package:hackAndRoll/storage/storage.dart';
 
-import './screens/CompletedModules.dart';
+import './screens/CompletedModule.dart';
 
 import './widgets/FirstScreenForm.dart';
 import 'models/module.dart';
@@ -14,9 +14,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
-      routes: {
-        '/completedModules' : (ctx) => CompletedModules()
-      },
     );
   }
 }
@@ -151,7 +148,10 @@ class _MyHomePageState extends State<MyHomePage> {
     print(widget._focusArea);
 
     if (widget._UeRemaining != null && widget._studentYear != '' && widget._focusArea != '' && widget._GeRemaining != null) {
-      Navigator.of(context).pushNamed('/completedModules');
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CompletedModule(widget.completedMods)),
+  );
     }
   }
 

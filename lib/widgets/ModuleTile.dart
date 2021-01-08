@@ -1,27 +1,39 @@
 import 'package:flutter/material.dart';
 
 class ModuleTile extends StatefulWidget {
-  Color color;
   String moduleName;
-  Function _addModule;
-  Function _changeColor;
+  var completedModule;
+  Color tileColor = Colors.white;
 
-  ModuleTile(this.color, this.moduleName, this._addModule, this._changeColor);
+  ModuleTile(this.moduleName, this.completedModule);
 
   @override
   _ModuleTileState createState() => _ModuleTileState();
 }
 
 class _ModuleTileState extends State<ModuleTile> {
+  void _addAndDeleteModules(String moduleName) {
+    print("Hello");
+    setState(() {
+      if (widget.tileColor == Colors.white) {
+        widget.completedModule.add(widget.moduleName);
+        widget.tileColor = Colors.green;
+      } else {
+        widget.completedModule.removeWhere((mod) => mod == moduleName);
+        widget.tileColor = Colors.white;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: widget.color),
-      child: ListTile(title: Text('widget.moduleName'), 
-        onTap: widget._addModule,
+      decoration: BoxDecoration(color: widget.tileColor),
+      child: ListTile(title: Text(widget.moduleName), 
+        onTap: () => _addAndDeleteModules(widget.moduleName),
         leading: CircleAvatar(
           backgroundColor: Colors.yellow,
-          radius: 5,
+          radius: 15,
           child: Text(widget.moduleName[0]),
         ),
       )
