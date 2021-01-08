@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 
+import './screens/CompletedModule.dart';
+
 import './widgets/FirstScreenForm.dart';
 
 void main() => runApp(MyApp());
@@ -10,6 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
+      routes: {
+        '/completedModule' : (ctx) => CompletedModule()
+      },
     );
   }
 }
@@ -101,9 +106,6 @@ var FocusAreaOptions = [
 
   void _submitUE(String value) {
     var parse = int.parse(value);
-    if (int == null) {
-      return;
-    }
     if (parse >= 0 && parse <= 32) {
       setState(() {
         widget._UeRemaining = parse;
@@ -114,10 +116,7 @@ var FocusAreaOptions = [
 
   void _submitGE(String value) {
     var parse = int.parse(value);
-    if (int == null) {
-      return;
-    }
-    if (parse >= 0 && parse <= 5) {
+    if (parse >= 0 && parse <= 20) {
       setState(() {
         widget._GeRemaining = parse;
       });
@@ -127,8 +126,12 @@ var FocusAreaOptions = [
 
   void _saveForm() {
     print(widget._UeRemaining);
+    print(widget._GeRemaining);
     print(widget._studentYear);
     print(widget._focusArea);
+    if (widget._UeRemaining != null && widget._studentYear != '' && widget._focusArea != '' && widget._GeRemaining != null) {
+      Navigator.of(context).pushNamed('/completedModule');
+    }
   }
 
   void _saveStudentYear(String value) {
@@ -149,7 +152,8 @@ var FocusAreaOptions = [
       appBar: AppBar(
         title: Text('Acad Planner NUS'),
       ),
-      body: Column(
+      body: SingleChildScrollView(child: 
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Card(
@@ -158,9 +162,9 @@ var FocusAreaOptions = [
                 padding: EdgeInsets.all(10),
                 child: Column(children: <Widget>[
                   TextField(decoration: InputDecoration(labelText: 'Amount of UEs Remaining'),
-                  onSubmitted: _submitUE,),
+                  onSubmitted: _submitUE, onChanged: _submitUE,),
                   TextField(decoration: InputDecoration(labelText: 'Amount of GEs Remaining'),
-                  onSubmitted: _submitGE,),
+                  onSubmitted: _submitGE, onChanged: _submitGE,),
                   FirstScreenForm('Student Year', widget._studentYear, YearOptions, _saveStudentYear),
                   FirstScreenForm('Focus Area', widget._focusArea, FocusAreaOptions, _saveFocusArea),
                 ],)
@@ -175,6 +179,7 @@ var FocusAreaOptions = [
               ),
           ],
         ),
-      );
+      ),   
+    );
   }
 }
