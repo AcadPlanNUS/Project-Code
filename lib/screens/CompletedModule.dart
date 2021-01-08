@@ -3,6 +3,7 @@ import '../widgets/moduleTile.dart';
 import 'AcadPlan.dart';
 
 class CompletedModule extends StatefulWidget {
+  String sem;
   var csModules = [
     "CS1101S Programming Methodology",
     "CS1231S Discrete Structures",
@@ -14,7 +15,6 @@ class CompletedModule extends StatefulWidget {
     "CS2100 Computer Organisation",
     "IS1103 Ethics in Computing",
     "ULR",
-    "CP2106 Independent Software Development Project (Orbital)",
     "CS2103T Software Engineering",
     "CS2105 Introduction to Computer Networks",
     "CS2106 Introduction to Operating Systems",
@@ -43,7 +43,7 @@ class CompletedModule extends StatefulWidget {
 
   var completedModules = [];
 
-  CompletedModule(this.completedModules);
+  CompletedModule(this.completedModules, this.sem);
 
   @override
   _CompletedModuleState createState() => _CompletedModuleState();
@@ -55,7 +55,7 @@ class _CompletedModuleState extends State<CompletedModule> {
     copy.removeWhere((element) => widget.completedModules.contains(element));
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AcadPlan(copy)),
+      MaterialPageRoute(builder: (context) => AcadPlan(copy, widget.sem)),
   );
   }
   @override

@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CompletedModule(widget.completedMods)),
+            builder: (context) => CompletedModule(widget.completedMods, widget._studentYear)),
       );
     }
   }
