@@ -118,8 +118,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void addModules(List<Module> modules) {
     moduleMap = Map.fromIterable(modules,
         key: (mod) => mod.moduleCode, value: (mod) => mod);
-    // Example usage
-    print(moduleMap["CS1010"].toString());
   }
 
   void _submitUE(String value) {
@@ -155,7 +153,8 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CompletedModule(widget.completedMods, widget._studentYear)),
+            builder: (context) =>
+                CompletedModule(widget.completedMods, widget._studentYear)),
       );
     }
   }
