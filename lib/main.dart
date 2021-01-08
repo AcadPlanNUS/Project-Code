@@ -6,6 +6,7 @@ import 'package:hackAndRoll/storage/storage.dart';
 import './screens/CompletedModule.dart';
 
 import './widgets/FirstScreenForm.dart';
+import 'models/module.dart';
 
 void main() => runApp(MyApp());
 
@@ -107,13 +108,15 @@ var FocusAreaOptions = [
     },
   ];
 
-  ModelManager modelManager;
+  ModelManager modelmanager;
   Storage storage = new Storage();
+  Future<List<Module>> modules;
+
 
   @override
   void initState() {
     super.initState();
-    storage.fetchModule();
+    modules = storage.fetchModule();
   }
   
   void _submitUE(String value) {

@@ -6,17 +6,14 @@ import 'package:hackAndRoll/models/module.dart';
 
 class Storage {
 
-  List<Module> module;
-
-  Future<bool> fetchModule() async {
+  Future<List<Module>> fetchModule() async {
     final response =
         await http.get('https://api.nusmods.com/v2/2020-2021/moduleList.json');
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      module = parseModules(response.body);
-      return true;
+      return parseModules(response.body);
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
