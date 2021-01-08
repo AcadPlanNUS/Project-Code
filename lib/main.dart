@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 
-import './screens/CompletedModule.dart';
+import './screens/CompletedModules.dart';
 
 import './widgets/FirstScreenForm.dart';
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: MyHomePage(),
       routes: {
-        '/completedModule' : (ctx) => CompletedModule()
+        '/completedModules' : (ctx) => CompletedModules()
       },
     );
   }
@@ -131,7 +131,7 @@ var FocusAreaOptions = [
     print(widget._studentYear);
     print(widget._focusArea);
     if (widget._UeRemaining != null && widget._studentYear != '' && widget._focusArea != '' && widget._GeRemaining != null) {
-      Navigator.of(context).pushNamed('/completedModule');
+      Navigator.of(context).pushNamed('/completedModules');
     }
   }
 
